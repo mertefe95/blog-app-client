@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans';
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+.homepage-div {
+    background-color: blue;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 20vh;
+    font-family: 'Open Sans';
+}
+
+.nav-ul {
+    display: flex;
+    list-style: none;
+}
+
+.nav-ul a {
+    text-decoration: none;
+    color: black;
+}
+
+.nav-ul li {
+    padding: 0 40px;
+}
+
+.create-post-form {
+    display: flex;
+    flex-direction: column;
+    color: black
+}
+
+.create-post-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#post-text {
+    padding: 50px;
+}
+
+.create-post-form > label {
+    padding-top: 20px;
+    padding-bottom: 5px;
+}
+.create-post-form > button {
+    margin-top: 10px;
+}
