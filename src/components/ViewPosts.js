@@ -14,7 +14,7 @@ class ViewPosts extends React.Component {
     }
 
     async getPosts() {
-        const res = await Axios.get("http://localhost:8080/api/posts")
+        const res = await Axios.get("https://blog-app-mern-project.herokuapp.com/api/posts")
         this.setState({ posts: res.data });
     }
 
