@@ -28,15 +28,13 @@ class PostListItem extends React.Component {
         const {post} = this.props; 
 
         return (
-                <div class="single-post">
-                <a className="btn" onClick={this.onShowPost} >
-                    <button><i class="fas fa-trash-alt"></i></button>
+                <button onClick={this.onShowPost} >
                     <h3>{post.blogTitle}</h3>
+                    
                     <p>{post.authorName}</p>
                     <span>{this.renderDate(post.createdAt)}</span>
                     
-                </a>
-                </div>
+                </button>
         );
     }
 }
