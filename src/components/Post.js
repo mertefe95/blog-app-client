@@ -11,13 +11,13 @@ class Post extends React.Component {
     }
 
     async getPost() {
-        const res = await Axios.get(`http://localhost:8080/api/posts/${this.props.match.params.id}`);
+        const res = await Axios.get(`https://blog-app-mern-stack.herokuapp.com/api/posts/${this.props.match.params.id}`);
         this.setState({ post: res.data });
     }
 
 
     renderHTML () {
-        return {__html: this.state.post.html};
+        return {__html: this.state.post.blogText};
     }
 
     renderPost() {
