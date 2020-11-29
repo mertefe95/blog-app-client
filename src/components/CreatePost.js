@@ -35,7 +35,7 @@ class CreatePost extends React.Component {
             blogText: this.state.blogText,
             authorName: this.state.authorName
         };
-        Axios.post("http://localhost:8080/api/posts", post).then(res => console.log(res)).catch(err => console.log(err));  };
+        Axios.post("https://blog-app-mern-stack.herokuapp.com/api/posts", post).then(res => console.log(res)).catch(err => console.log(err));  };
     
 
 

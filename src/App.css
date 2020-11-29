@@ -3,12 +3,23 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Open Sans';
+    
 }
+
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 .homepage-div {
     background-color: blue;
+}
+
+.single-post {
+    border: 2px solid white;
+}
+.btn {
+    opacity: 0.9;
+
+    border: 2px solid white;
 }
 
 .nav {
@@ -55,4 +66,9 @@
 }
 .create-post-form > button {
     margin-top: 10px;
+}
+
+.single-post-div {
+    display: flex;
+    justify-content: space-around;
 }

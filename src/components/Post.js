@@ -11,7 +11,7 @@ class Post extends React.Component {
     }
 
     async getPost() {
-        const res = await Axios.get(`http://localhost:8080/api/posts/${this.props.match.params.id}`);
+        const res = await Axios.get(`https://blog-app-mern-stack.herokuapp.com/api/posts/${this.props.match.params.id}`);
         this.setState({ post: res.data });
     }
 
@@ -26,7 +26,14 @@ class Post extends React.Component {
 
     render() {
         return (
+            <div className="single-post-div">
             <div>{this.renderPost()}</div>
+            <div className="single-post-buttons">
+                <button className="single-post-first-btn"><i className="fas fa-edit"></i></button>
+                <button className="single-post-second-btn"><i className="fas fa-trash-alt"></i></button>
+            </div>
+            
+            </div>
         )
     }
 }
