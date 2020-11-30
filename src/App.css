@@ -72,3 +72,22 @@
     display: flex;
     justify-content: space-around;
 }
+
+.register-form-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-form > label {
+    padding: 5px 0;
+}
+
+.register-btn {
+    margin-top: 10px;
+}
