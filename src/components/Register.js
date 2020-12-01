@@ -7,7 +7,8 @@ class Register extends React.Component {
     state = {
         username: "",
         email: "",
-        password: ""
+        password: "",
+        error:""
     };
 
 
@@ -37,7 +38,8 @@ class Register extends React.Component {
             password: this.state.password
         };
 
-        Axios.post("https://blog-app-mern-stack.herokuapp.com/api/register", user).then(res => console.log(res)).catch(err => console.log(err)); };
+        Axios.post("https://blog-app-mern-stack.herokuapp.com/api/register", user).then(res => console.log(res)).catch(err => console.log(err)); 
+    } 
 
     render() {
         return( 
@@ -55,6 +57,7 @@ class Register extends React.Component {
 
                         <button type="submit" className="register-btn">Submit</button>
 
+                        
 
                 </form>
 
