@@ -35,12 +35,12 @@ useEffect(() => {
     }
 
     const tokenRes = await Axios.post(
-      "http://localhost:8080/api/tokenIsValid", 
+      "https://blog-app-mern-stack.herokuapp.com/api/tokenIsValid", 
       null, 
       { headers: {"x-auth-token": token } }
       );
       if (tokenRes.data) {
-        const userRes = await Axios.get("http://localhost:8080/api/", {
+        const userRes = await Axios.get("https://blog-app-mern-stack.herokuapp.com/api/", {
           headers: { "x-auth-token": token },
       });
       setUserData({
