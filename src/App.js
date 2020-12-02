@@ -21,7 +21,7 @@ function App() {
 
   useEffect(() => {
     Axios
-    .get('http://localhost:8080/api/posts')
+    .get('https://blog-app-mern-stack.herokuapp.com/api/posts')
     .then(res => setPosts(res.data))
     .catch(error => console.log(error));
 })

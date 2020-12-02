@@ -34,7 +34,7 @@ function Register() {
                 user: loginRes.data.user,
             });
             localStorage.setItem("auth-token", loginRes.data.token);
-            history.push("/api");
+            history.push("/");
         };
 
         return( 
