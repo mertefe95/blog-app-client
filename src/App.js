@@ -25,9 +25,9 @@ function App() {
         <Nav />
         <Switch>
           <Route exact path="/" render={() => <Posts posts={posts} />} />
-          <Route  path="/post/:id" render={(props) => <Post {...props}  posts={posts} />} />
-          <Route  path="/edit-post/:id" render={(props) => <EditPost {...props}  posts={posts} />} />
-          <Route  path="/create-post" exact component={CreatePost} />
+          <Route  exact path="/post/:id" render={(props) => <Post {...props}  posts={posts} />} />
+          <Route  exact path="/edit-post/:id" render={(props) => <EditPost {...props}  posts={posts} />} />
+          <Route  exact path="/create-post" exact component={CreatePost} />
           <Route  exact path="/register" exact component={Register} />
         </Switch>
         <Footer />
