@@ -74,7 +74,15 @@
     padding: 5px 15px;
 }
 
+.message {
+    color: orange;
+    font-weight: 700;
+}
 
+.message-create {
+    color: blue;
+    font-weight: 700;
+}
 
 #post-text {
     padding: 50px;
