@@ -6,17 +6,49 @@ import ErrorNotice from "../components/misc/ErrorNotice"
 import { useFormik } from 'formik';
 
 
+const initialValues = {
+        username: '',
+        email: '',
+        password: ''
+}
+
+const onSubmit = values => {
+    console.log('Form data', values)
+}
+
+const validate = values => {
+    // values.email values.name values.channel
+    let errors = {}
+    const digit = /^(?=.*\d)/
+    const upperLetter = /^(?=.*[A-Z])/
+
+    if(!values.username) {
+        errors.username = 'Required'
+    }
+
+    if(!values.password) {
+        errors.password = 'Required'
+    } else if (!digit.test(values.password)) {
+        errors.password = 'Password must have a number.'
+    } else if (!upperLetter.test(values.password)) {
+        errors.password = 'Password must have one uppercase letter.'
+    }
+
+    if(!values.email) {
+        errors.email = 'Required'
+    }
+
+    
+
+    return errors
+}
+
+
 function Register() {
     const formik = useFormik({
-        initialValues: {
-            username: '',
-            email: '',
-            password: ''
-        },
-        onSubmit: values => {
-            console.log('Form data', values)
-        }
-
+        initialValues,
+        onSubmit,
+        validate
     })
     console.log('Form data', formik.values)
 
