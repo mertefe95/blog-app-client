@@ -20,7 +20,7 @@ const EditPost = props => {
         setBlogText("");
         setAuthorName("");
 
-        Axios.put(`http://localhost:8080/api/posts/${props.match.params.id}`, post)
+        Axios.put(`https://blog-app-mern-stack.herokuapp.com/api/posts/${props.match.params.id}`, post)
             .then(res => setMessage(res.data))
             .catch(err => {
                 console.log(err);
@@ -28,7 +28,7 @@ const EditPost = props => {
     };
 
     useEffect(() => {
-        Axios.get(`http://localhost:8080/api/posts/${props.match.params.id}`)
+        Axios.get(`https://blog-app-mern-stack.herokuapp.com/api/posts/${props.match.params.id}`)
         .then(res => [
             setBlogTitle(res.data.blogTitle),
             setBlogText(res.data.blogText),
