@@ -28,21 +28,20 @@ const validate = values => {
 
     if(!values.password) {
         errors.password = 'Required'
+    } else if (values.password.length < 8) {
+        errors.password = 'Password should be more than 8 characters.'
     } else if (!digit.test(values.password)) {
         errors.password = 'Password must have a number.'
     } else if (!upperLetter.test(values.password)) {
         errors.password = 'Password must have one uppercase letter.'
-    }
+    } 
 
     if(!values.email) {
         errors.email = 'Required'
     }
 
-    
-
     return errors
 }
-
 
 function Register() {
     const formik = useFormik({
@@ -51,8 +50,7 @@ function Register() {
         validate
     })
     console.log('Form data', formik.values)
-
-    const [error, setError] = useState();
+    console.log('Form errors', formik.errors)
 
     const { setUserData } = useContext(UserContext);
     const history = useHistory();
@@ -64,7 +62,6 @@ function Register() {
         try {
         const newUser = {email, password, username};
 
-       
         await Axios.post(
             "https://blog-app-mern-stack.herokuapp.com/api/register", 
             newUser
@@ -89,18 +86,12 @@ function Register() {
 
         */
 
-
         return( 
-
-
 
                 <form className="register-form" onSubmit={formik.handleSubmit}>
                         <h2>Register</h2>
-                        {error && (
-                            <ErrorNotice message={error} clearError={() => setError(undefined)} />
-                        
-                        )}
 
+                        <div className="form-control">
                         <label htmlFor="username" >Username:</label>
                         <input  
                             onChange={formik.handleChange}
@@ -111,7 +102,10 @@ function Register() {
                             name="username"
                             value={formik.values.username}>
                         </input>
+                        {formik.errors.username ? <div className="error">{formik.errors.username} </div> : null}
+                        </div>
 
+                        <div className="form-control">
                         <label htmlFor="email">Email:</label>
                         <input  
                             onChange={formik.handleChange}
@@ -122,7 +116,10 @@ function Register() {
                             name="email"
                             value={formik.values.email}>
                         </input>
+                        {formik.errors.email ? <div className="error">{formik.errors.email} </div> : null} 
+                        </div>
 
+                        <div className="form-control">
                         <label htmlFor="password">Password:</label>
                         <input 
                             onChange={formik.handleChange} 
@@ -133,12 +130,13 @@ function Register() {
                             name="password"
                             value={formik.values.password}>
                         </input>
+                        {formik.errors.password ? <div className="error">{formik.errors.email} </div> : null}
+                        </div>
 
                         <button type="submit" className="register-btn">Submit</button>
 
 
                 </form>
-                   
         )
         };
     

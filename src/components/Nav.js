@@ -32,6 +32,7 @@ function Nav() {
                 <li className="nav-li-first"><a  href="/">VIEW POSTS</a></li>
                 <li className="nav-li-second"><a  href="/create-post">CREATE A POST</a></li>
                 <li className="nav-li-fourth"><button onClick={logout}>LOGOUT</button></li>
+                <li className="nav-li-fifth"><a href="/my-profile">MY PROFILE</a></li>
                 </ul>
                 ) : (
                 <>

@@ -20,7 +20,7 @@ const CreatePost = () => {
         setBlogText("");
         setAuthorName("");
 
-        Axios.post('https://blog-app-mern-stack.herokuapp.com/api/posts', post)
+        Axios.post('http://localhost:8080/api/posts', post)
         .then(res => setMessage(res.data))
         .catch(err => {
             console.log(err);

@@ -11,6 +11,8 @@ import Login from "./components/Login";
 import CreatePost from "./components/CreatePost";
 import EditPost from "./components/EditPost";
 import UserContext from "./context/UserContext";
+import ForgotPassword from "./components/ForgotPassword";
+import MyProfile from "./components/MyProfile";
 
 function App() {
   const [posts, setPosts] = useState([])
@@ -66,6 +68,8 @@ useEffect(() => {
           <Route  exact path="/create-post" exact component={CreatePost} />
           <Route  exact path="/register" exact component={Register} />
           <Route  exact path="/login" exact component={Login} />
+          <Route exact path="/my-profile" exact component={MyProfile} />
+          <Route exact path="/forgot-password" exact component={ForgotPassword} />
         </Switch>
         <Footer />
         </UserContext.Provider>
