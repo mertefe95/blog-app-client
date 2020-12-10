@@ -6,7 +6,7 @@ const Posts = ({posts}) => {
     const [post, setPost] = useState([]);
     // DELETE POST BY ID
     const deletePost = id => {
-        Axios.delete(`https://blog-app-mern-stack.herokuapp.com/${id}`)
+        Axios.delete(`http://localhost:8080/api/${id}`)
             .then(res => alert(res.data))
             setPost(post.filter(elem => elem._id !== id));
     }

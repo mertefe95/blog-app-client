@@ -101,17 +101,26 @@
     justify-content: space-around;
 }
 
-.register-form-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.register-form {
+.register-form, .login-form, .forgot-password-form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.register-form > .form-control {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.forgot-password-form > h2 {
+    padding-bottom: 10px;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
 }
 
 .form-control {

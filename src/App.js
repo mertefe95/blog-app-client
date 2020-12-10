@@ -23,7 +23,7 @@ function App() {
 
   useEffect(() => {
     Axios
-    .get('https://blog-app-mern-stack.herokuapp.com/api/posts')
+    .get('http://localhost:8080/api/posts')
     .then(res => setPosts(res.data))
     .catch(error => console.log(error));
 })
@@ -37,12 +37,12 @@ useEffect(() => {
     }
 
     const tokenRes = await Axios.post(
-      "https://blog-app-mern-stack.herokuapp.com/api/tokenIsValid", 
+      "http://localhost:8080/api/tokenIsValid", 
       null, 
       { headers: {"x-auth-token": token } }
       );
       if (tokenRes.data) {
-        const userRes = await Axios.get("https://blog-app-mern-stack.herokuapp.com/api/", {
+        const userRes = await Axios.get("http://localhost:8080/api/", {
           headers: { "x-auth-token": token },
       });
       setUserData({
@@ -62,9 +62,9 @@ useEffect(() => {
       <UserContext.Provider value={{ userData, setUserData }}>
         <Nav />
         <Switch>
-          <Route exact path="/" render={() => <Posts posts={posts} />} />
-          <Route  exact path="/post/:id" render={(props) => <Post {...props}  posts={posts} />} />
-          <Route  exact path="/edit-post/:id" render={(props) => <EditPost {...props}  posts={posts} />} />
+          <Route exact path="/"  exact render={() => <Posts posts={posts} />} />
+          <Route  exact path="/post/:id" exact render={(props) => <Post {...props}  posts={posts} />} />
+          <Route  exact path="/edit-post/:id" exact render={(props) => <EditPost {...props}  posts={posts} />} />
           <Route  exact path="/create-post" exact component={CreatePost} />
           <Route  exact path="/register" exact component={Register} />
           <Route  exact path="/login" exact component={Login} />

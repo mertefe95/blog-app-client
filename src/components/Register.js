@@ -3,8 +3,8 @@ import { useHistory } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import Axios from "axios";
 import ErrorNotice from "../components/misc/ErrorNotice"
-import { useFormik } from 'formik';
-
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from "yup";
 
 const initialValues = {
         username: '',
@@ -12,61 +12,21 @@ const initialValues = {
         password: ''
 }
 
-const onSubmit = values => {
-    console.log('Form data', values)
-}
-
-const validate = values => {
-    // values.email values.name values.channel
-    let errors = {}
-    const digit = /^(?=.*\d)/
-    const upperLetter = /^(?=.*[A-Z])/
-
-    if(!values.username) {
-        errors.username = 'Required'
-    }
-
-    if(!values.password) {
-        errors.password = 'Required'
-    } else if (values.password.length < 8) {
-        errors.password = 'Password should be more than 8 characters.'
-    } else if (!digit.test(values.password)) {
-        errors.password = 'Password must have a number.'
-    } else if (!upperLetter.test(values.password)) {
-        errors.password = 'Password must have one uppercase letter.'
-    } 
-
-    if(!values.email) {
-        errors.email = 'Required'
-    }
-
-    return errors
-}
-
-function Register() {
-    const formik = useFormik({
-        initialValues,
-        onSubmit,
-        validate
-    })
-    console.log('Form data', formik.values)
-    console.log('Form errors', formik.errors)
-
-    const { setUserData } = useContext(UserContext);
-    const history = useHistory();
-
-/*
-    const submit = async (e) => {
-        e.preventDefault();
-
+const onSubmit = async (e) => {
+    e.preventDefault();
+    
         try {
-        const newUser = {email, password, username};
+            const email = initialValues.email
+            const password = initialValues.password
+            const username = initialValues.username
+
+            const newUser = {email, password, username};
 
         await Axios.post(
-            "https://blog-app-mern-stack.herokuapp.com/api/register", 
+            "http://localhost:8080/api/register", 
             newUser
             );
-        const loginRes = await Axios.post("https://blog-app-mern-stack.herokuapp.com/api/login",{
+        const loginRes = await Axios.post("http://localhost:8080/api/login",{
             email,
             username,
             password,
@@ -81,62 +41,94 @@ function Register() {
         }
         catch (err) {
             err.response.data.error && setError(err.response.data.error);
+}
+
+}
+
+const regEx = /^(?=.*[A-Z])(?=.*\d)(?=.{8,})/
+
+
+
+const validationSchema = Yup.object({ 
+
+    username: Yup.string().required('Required!'),
+    email: Yup.string()
+        .email('Invalid email format.')
+        .required('Required'),
+
+    
+    password: Yup.string()
+        .required('Required!')
+        .matches(
+            regEx,
+            'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character'
+        )
+        .min(8)
+})
+
+function Register() {
+
+    const { setUserData } = useContext(UserContext);
+    const history = useHistory();
+
+/*
+    const submit = async (e) => {
+        
         }
         };
 
         */
 
         return( 
-
-                <form className="register-form" onSubmit={formik.handleSubmit}>
+            <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={onSubmit} >
+                <Form className="register-form" >
                         <h2>Register</h2>
 
                         <div className="form-control">
                         <label htmlFor="username" >Username:</label>
-                        <input  
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
+                        <Field  
+                            
                             className="register-username" 
                             type="text" 
                             id="username" 
                             name="username"
-                            value={formik.values.username}>
-                        </input>
-                        {formik.errors.username ? <div className="error">{formik.errors.username} </div> : null}
+
+                        />
+                        <ErrorMessage name="username" />
                         </div>
 
                         <div className="form-control">
                         <label htmlFor="email">Email:</label>
-                        <input  
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
+                        <Field  
+
                             className="register-email" 
                             type="email" 
                             id="email" 
                             name="email"
-                            value={formik.values.email}>
-                        </input>
-                        {formik.errors.email ? <div className="error">{formik.errors.email} </div> : null} 
+                        />
+                        <ErrorMessage name="email" />
                         </div>
 
                         <div className="form-control">
                         <label htmlFor="password">Password:</label>
-                        <input 
-                            onChange={formik.handleChange} 
-                            onBlur={formik.handleBlur}
+                        <Field 
+
                             className="register-password" 
                             type="password" 
                             id="password" 
                             name="password"
-                            value={formik.values.password}>
-                        </input>
-                        {formik.errors.password ? <div className="error">{formik.errors.email} </div> : null}
+                        />                      
+                        <ErrorMessage name="password" />
                         </div>
 
                         <button type="submit" className="register-btn">Submit</button>
 
 
-                </form>
+                </Form>
+                </Formik>
         )
         };
     

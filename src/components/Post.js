@@ -7,7 +7,7 @@ const Post = (props) => {
     const [authorName, setAuthorName] = useState("");
 
 useEffect(() => {
-    Axios.get(`https://blog-app-mern-stack.herokuapp.com/api/posts/${props.match.params.id}`)
+    Axios.get(`http://localhost:8080/api/posts/${props.match.params.id}`)
     .then(res => [
         setBlogTitle(res.data.blogTitle),
         setBlogText(res.data.blogText),
