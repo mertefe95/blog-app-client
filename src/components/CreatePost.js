@@ -1,79 +1,74 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Axios from "axios";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-
-
-const validationSchema = Yup.object({
-    blogTitle: Yup.string()
-            .required('Required.'),
-    blogText: Yup.string()
-            .required('Required.'),
-    authorName: Yup.string()
-            .required('Required')
-});
-
-
-const onSubmit = values => {
-    console.log('Form data', values)
-}
-
 
 const CreatePost = () => {
-    const [message, setMessage] = useState('');
+    const [blogTitle, setBlogTitle] = useState("");
+    const [blogText, setBlogText] = useState("");
+    const [authorName, setAuthorName] = useState("");
+    const [message, setMessage] = useState("");
 
     const changeOnClick = e => {
+        
         e.preventDefault();
 
         const post = {
             blogTitle,
             blogText,
-            authorName   
-        };
+            authorName
+        }
 
-        setBlogTitle("");
-        setBlogText("");
-        setAuthorName("");
-
-        Axios.post('http://localhost:8080/api/posts', post)
-        .then(res => setMessage(res.data))
-        .catch(err => {
-            console.log(err);
-        })
-    };
-
-
-    const initialValues = {
-        blogTitle: '',
-        blogText: '',
-        authorName: ''
+        Axios
+            .post("http://localhost:8080/api/posts", post)
+            .then(res => setMessage(res.data))
+            .catch(err => {
+                console.log(err);
+            });
     }
 
+
     return (
-        <Formik 
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={onSubmit}>
-    <Form encType="multipart/form-data" className="create-post-form">
-        <h2>Create Post</h2>
-        <span className="message-edit">{message}</span>
 
-        <label htmlFor="blogTitle">Blog Title:</label>
-        <Field type="text" id="blogTitle" name="blogTitle" />
-        <ErrorMessage name="blogTitle" />
+        <form onSubmit={changeOnClick} encType="multipart/form-data"> 
+            <h1>Create a Blog Post</h1>
+            <span className="message">{message}</span>
 
-        <label htmlFor="blogText">Blog Text:</label>
-        <Field type="text" id="blogText" name="blogText" />
-        <ErrorMessage name="blogText" />
 
-        <label htmlFor="authorname">Author Name:</label>
-        <Field type="text" id="authorName" name="authorName" />
-        <ErrorMessage name="authorName" />
+            <div className="form-group">
+                <label htmlFor="blogTitle">Blog Title:</label>
+                <input 
+                    type="text" 
+                    id="blogTitle" 
+                    className="form-control"
+                    onChange={e => setBlogTitle(e.target.value)}  />
+            </div>
 
-        <button type="submit">Submit</button>
-    </Form>
-    </Formik>
-)
+            <div className="form-group">
+                <label htmlFor="blogText">Blog Text:</label>
+                <input 
+                    type="text" 
+                    id="blogText" 
+                    className="form-control" 
+                    onChange={e => setBlogText(e.target.value)} 
+                    />
+                
+            </div>
+
+            <div className="form-group">
+                <label htmlFor="authorName">Author Name:</label>
+                <input 
+                    type="text" 
+                    id="authorName" 
+                    className="form-control"
+                    onChange={e => setAuthorName(e.target.value)}  />
+                
+            </div>
+
+            <button type="submit" className="submit-btn">Submit</button>
+
+        </form>
+    )
 }
+
+
 
 export default CreatePost;

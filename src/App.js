@@ -2,17 +2,16 @@ import './App.css';
 import React, {useState, useEffect} from "react";
 import Axios from "axios";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Nav from "./components/Nav";
+import Header from "./layouts/Header";
 import Posts from "./components/Posts";
 import Post from "./components/Post";
-import Footer from "./components/Footer";
+import Footer from "./layouts/Footer";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import CreatePost from "./components/CreatePost";
 import EditPost from "./components/EditPost";
 import UserContext from "./context/UserContext";
 import ForgotPassword from "./components/ForgotPassword";
-import MyProfile from "./components/MyProfile";
 
 function App() {
   const [posts, setPosts] = useState([])
@@ -26,7 +25,7 @@ function App() {
     .get('http://localhost:8080/api/posts')
     .then(res => setPosts(res.data))
     .catch(error => console.log(error));
-})
+  })
 
 useEffect(() => {
   const checkLoggedIn = async () => {
@@ -60,7 +59,7 @@ useEffect(() => {
     
       <Router>
       <UserContext.Provider value={{ userData, setUserData }}>
-        <Nav />
+        <Header />
         <Switch>
           <Route exact path="/"  exact render={() => <Posts posts={posts} />} />
           <Route  exact path="/post/:id" exact render={(props) => <Post {...props}  posts={posts} />} />
@@ -68,8 +67,6 @@ useEffect(() => {
           <Route  exact path="/create-post" exact component={CreatePost} />
           <Route  exact path="/register" exact component={Register} />
           <Route  exact path="/login" exact component={Login} />
-          <Route exact path="/my-profile" exact component={MyProfile} />
-          <Route exact path="/forgot-password" exact component={ForgotPassword} />
         </Switch>
         <Footer />
         </UserContext.Provider>

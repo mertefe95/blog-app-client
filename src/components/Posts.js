@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 
-const Posts = ({posts}) => {
+const Posts = ({ posts }) => {
     const [post, setPost] = useState([]);
     // DELETE POST BY ID
     const deletePost = id => {
-        Axios.delete(`http://localhost:8080/api/${id}`)
+        Axios.delete(`http://localhost:8080/api/posts/${id}`)
             .then(res => alert(res.data))
             setPost(post.filter(elem => elem._id !== id));
     }

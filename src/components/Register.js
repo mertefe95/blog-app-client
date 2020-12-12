@@ -1,138 +1,66 @@
-import React, {useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
-import UserContext from "../context/UserContext";
+import React, { useState } from "react";
 import Axios from "axios";
-import ErrorNotice from "../components/misc/ErrorNotice"
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from "yup";
+import ErrorNotice from "./misc/ErrorNotice";
 
-const initialValues = {
-        username: '',
-        email: '',
-        password: ''
-}
+const Register = () => {
+    const [username, setUsername] = useState();
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const [error, setError] = useState();
+    const [verifyMessage, setVerifyMessage] = useState({
+    text: undefined,
+    });
 
-const onSubmit = async (e) => {
-    e.preventDefault();
-    
-        try {
-            const email = initialValues.email
-            const password = initialValues.password
-            const username = initialValues.username
-
-            const newUser = {email, password, username};
-
-        await Axios.post(
-            "http://localhost:8080/api/register", 
-            newUser
-            );
-        const loginRes = await Axios.post("http://localhost:8080/api/login",{
-            email,
-            username,
-            password,
-        });
-
-            setUserData({
-                token: loginRes.data.token,
-                user: loginRes.data.user,
-            });
-            localStorage.setItem("auth-token", loginRes.data.token);
-            history.push("/");
-        }
-        catch (err) {
-            err.response.data.error && setError(err.response.data.error);
-}
-
-}
-
-const regEx = /^(?=.*[A-Z])(?=.*\d)(?=.{8,})/
-
-
-
-const validationSchema = Yup.object({ 
-
-    username: Yup.string().required('Required!'),
-    email: Yup.string()
-        .email('Invalid email format.')
-        .required('Required'),
-
-    
-    password: Yup.string()
-        .required('Required!')
-        .matches(
-            regEx,
-            'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character'
-        )
-        .min(8)
-})
-
-function Register() {
-
-    const { setUserData } = useContext(UserContext);
-    const history = useHistory();
-
-/*
     const submit = async (e) => {
-        
-        }
-        };
+    e.preventDefault();
 
-        */
+    try {
+        const newUser = { username, email, password };
+        await Axios.post("http://localhost:8080/api/register", newUser);
 
-        return( 
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={onSubmit} >
-                <Form className="register-form" >
-                        <h2>Register</h2>
+        setVerifyMessage({
+        text: "Please verify your email to proceed login.",
+        });
+    } catch (err) {
+        err.response.data.msg && setError(err.response.data.msg);
+    }}
 
-                        <div className="form-control">
-                        <label htmlFor="username" >Username:</label>
-                        <Field  
-                            
-                            className="register-username" 
-                            type="text" 
-                            id="username" 
-                            name="username"
+    return (
+    <div className="page">
+        <h2>Register</h2>
+        <h3>{verifyMessage.text}</h3>
+        <h4>
+        {error && (
+            <ErrorNotice message={error} clearError={() => setError(undefined)} />
+        )}
+        </h4>
+        <form className="form" onSubmit={submit}>
+        <label htmlFor="register-username">Username</label>
+        <input
+            id="register-username"
+            type="username"
+            onChange={(e) => setUsername(e.target.value)}
+        />
 
-                        />
-                        <ErrorMessage name="username" />
-                        </div>
+        <label htmlFor="register-email">Email</label>
+        <input
+            id="register-email"
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
+        />
 
-                        <div className="form-control">
-                        <label htmlFor="email">Email:</label>
-                        <Field  
+        <label htmlFor="register-password">Password</label>
+        <input
+            id="register-password"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+        />
 
-                            className="register-email" 
-                            type="email" 
-                            id="email" 
-                            name="email"
-                        />
-                        <ErrorMessage name="email" />
-                        </div>
-
-                        <div className="form-control">
-                        <label htmlFor="password">Password:</label>
-                        <Field 
-
-                            className="register-password" 
-                            type="password" 
-                            id="password" 
-                            name="password"
-                        />                      
-                        <ErrorMessage name="password" />
-                        </div>
-
-                        <button type="submit" className="register-btn">Submit</button>
-
-
-                </Form>
-                </Formik>
-        )
-        };
-    
-
+        <button type="submit">Submit</button>
+        </form>
+        </div>
+    );
+};
 
 
 export default Register;
