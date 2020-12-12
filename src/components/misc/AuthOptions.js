@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import UserContext from "../../context/UserContext";
 
 export default function AuthOptions() {
@@ -19,11 +19,12 @@ export default function AuthOptions() {
     return (
         <nav className="auth-options">
         { userData.user ? (
-            <button onClick={logout}>Logout</button> 
+            <li><Link to="/create-post">CREATE A POST</Link></li>,
+            <li><button onClick={logout}>Logout</button> </li>
         ) : (
             <>
-                <button onClick={register}>Register</button>
-                <button onClick={login}>Login</button>
+                <li><button onClick={register}>Register</button></li>
+                <li><button onClick={login}>Login</button></li>
             </>
         )}
 

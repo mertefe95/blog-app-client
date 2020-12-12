@@ -1,9 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
+import { useHistory } from "react-router-dom";
+import UserContext from "../context/UserContext";
+
 
 const Posts = ({ posts }) => {
     const [post, setPost] = useState([]);
+
+
+    const { userData, setUserData } = useContext(UserContext); 
+
+    const history = useHistory();
+
     // DELETE POST BY ID
     const deletePost = id => {
         Axios.delete(`http://localhost:8080/api/posts/${id}`)
@@ -34,10 +43,18 @@ const Posts = ({ posts }) => {
         <p>{post.blogText}</p>
         <span>{post.authorName}</span>
 
-        <div className="post-icons-div">
+        
+        { userData.user ? (
+            <div className="post-icons-div">
             <Link to={`/edit-post/${post._id}`}><i className="far fa-edit"></i></Link>
             <Link><button onClick={() => deletePost(post._id)}><i className="far fa-trash-alt"></i></button></Link>
-        </div>
+            </div>
+        ) : (
+            <>
+
+            </>
+        )}
+        
     </div>
     ))}
     </div>

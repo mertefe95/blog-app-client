@@ -12,6 +12,7 @@ import CreatePost from "./components/CreatePost";
 import EditPost from "./components/EditPost";
 import UserContext from "./context/UserContext";
 import ForgotPassword from "./components/ForgotPassword";
+import AdminLogin from "./components/AdminLogin";
 
 function App() {
   const [posts, setPosts] = useState([])
@@ -21,39 +22,39 @@ function App() {
   });
 
   useEffect(() => {
+    const checkLoggedIn = async () => {
+      let token = localStorage.getItem("auth-token");
+      if (token === null) {
+        localStorage.setItem("auth-token", "");
+        token = "";
+      }
+  
+      const tokenRes = await Axios.post(
+        "http://localhost:8080/api/tokenIsValid", 
+        null, 
+        { headers: {"x-auth-token": token } }
+        );
+        if (tokenRes.data) {
+          const userRes = await Axios.get("http://localhost:8080/api/", {
+            headers: { "x-auth-token": token },
+        });
+        setUserData({
+          token,
+          user: userRes.data,
+        });
+        }
+    };
+  
+    checkLoggedIn();
+  }, []);
+  
+
+  useEffect(() => {
     Axios
     .get('http://localhost:8080/api/posts')
     .then(res => setPosts(res.data))
     .catch(error => console.log(error));
   })
-
-useEffect(() => {
-  const checkLoggedIn = async () => {
-    let token = localStorage.getItem("auth-token");
-    if (token === null) {
-      localStorage.setItem("auth-token", "");
-      token = "";
-    }
-
-    const tokenRes = await Axios.post(
-      "http://localhost:8080/api/tokenIsValid", 
-      null, 
-      { headers: {"x-auth-token": token } }
-      );
-      if (tokenRes.data) {
-        const userRes = await Axios.get("http://localhost:8080/api/", {
-          headers: { "x-auth-token": token },
-      });
-      setUserData({
-        token,
-        user: userRes.data,
-      });
-      }
-  };
-
-  checkLoggedIn();
-}, []);
-
 
   return (
     
@@ -62,11 +63,21 @@ useEffect(() => {
         <Header />
         <Switch>
           <Route exact path="/"  exact render={() => <Posts posts={posts} />} />
-          <Route  exact path="/post/:id" exact render={(props) => <Post {...props}  posts={posts} />} />
-          <Route  exact path="/edit-post/:id" exact render={(props) => <EditPost {...props}  posts={posts} />} />
-          <Route  exact path="/create-post" exact component={CreatePost} />
-          <Route  exact path="/register" exact component={Register} />
-          <Route  exact path="/login" exact component={Login} />
+          <Route exact path="/post/:id" exact render={(props) => <Post {...props}  posts={posts} />} />
+          <Route exact path="/admin-login" exact component={AdminLogin} />
+          <Route exact path="/register" exact component={Register} />
+          <Route exact path="/login" exact component={Login} />
+          <Route exact path="/forgot-password" exact component={ForgotPassword} />
+          
+          
+          { userData.user ? (
+            <Route exact path="/create-post" exact component={CreatePost} />,
+            <Route exact path="/edit-post/:id" exact render={(props) => <EditPost {...props}  posts={posts} />} />
+        ) : (
+            <>
+
+            </>
+        )} 
         </Switch>
         <Footer />
         </UserContext.Provider>

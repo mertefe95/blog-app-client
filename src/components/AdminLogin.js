@@ -1,19 +1,15 @@
 import React, { useState, useContext } from "react";
 import { useHistory, Link } from "react-router-dom";
 import Axios from "axios";
-import UserContext from "./context/UserContext";
-import ErrorNotice from "./misc/ErrorNotice";
-
-
+import UserContext from "../context/UserContext";
+import ErrorNotice from "../components/misc/ErrorNotice";
 
 const AdminLogin = () => {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [error, setError] = useState();
-    const [verifyMessage, setVerifyMessage] = useState({
-        text: undefined
-    });
+
 
     const { setUserData } = useContext(UserContext);
     const history = useHistory();
@@ -44,15 +40,15 @@ const AdminLogin = () => {
 
 
 return (
-<div className="page">
+<div className="admin-login-page">
     <h2>Admin Login</h2>
 
-    <h4>{error && <ErrorNotice message={error} clearError={() => setError(undefined)} />} </h4>
+    <h4>{error && (
+            <ErrorNotice message={error} clearError={() => setError(undefined)} />
+        )} </h4>
 
-    <h3>{verifyMessage.text}</h3>
 
-
-    <form className="form" onSubmit={submit}>
+    <form className="admin-login-form" onSubmit={submit}>
 
         <label htmlFor="login-email">Admin Email</label>
         <input id="login-email" type="email" onChange={e => setEmail(e.target.value)} />
@@ -64,7 +60,7 @@ return (
 
     </form>
 </div>
+)}
 
-)
-}
+
 export default AdminLogin;

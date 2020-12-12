@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import Axios from "axios";
+import ErrorNotice from "../components/misc/ErrorNotice";
 
 const CreatePost = () => {
     const [blogTitle, setBlogTitle] = useState("");
     const [blogText, setBlogText] = useState("");
     const [authorName, setAuthorName] = useState("");
     const [message, setMessage] = useState("");
+    const [error, setError] = useState();
 
     const changeOnClick = e => {
         
         e.preventDefault();
 
+        try {
         const post = {
             blogTitle,
             blogText,
@@ -23,14 +26,23 @@ const CreatePost = () => {
             .catch(err => {
                 console.log(err);
             });
-    }
+        }
+        catch (err) {
+            err.response.data.msg && setError(err.response.data.msg);
+        }}
+    
 
 
     return (
 
-        <form onSubmit={changeOnClick} encType="multipart/form-data"> 
+        <form className="create-post-form" onSubmit={changeOnClick} encType="multipart/form-data"> 
             <h1>Create a Blog Post</h1>
             <span className="message">{message}</span>
+            <h4>
+            {error && (
+            <ErrorNotice message={error} clearError={() => setError(undefined)} />
+            )}
+            </h4>
 
 
             <div className="form-group">

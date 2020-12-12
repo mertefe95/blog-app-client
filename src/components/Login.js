@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useHistory, Link } from "react-router-dom";
 import Axios from "axios";
 import UserContext from "../context/UserContext";
-import ErrorNotice from "./misc/ErrorNotice";
+import ErrorNotice from "../components/misc/ErrorNotice";
 
 
 
@@ -44,7 +44,7 @@ const Login = () => {
 
 
 return (
-<div className="page">
+<div className="login-page">
     <h2>Login</h2>
 
     <h3>{verifyMessage.text}</h3>
@@ -52,7 +52,7 @@ return (
     <h4>{error && <ErrorNotice message={error} clearError={() => setError(undefined)} />} </h4>
 
 
-    <form className="form" onSubmit={submit}>
+    <form className="login-form" onSubmit={submit}>
 
         <label htmlFor="login-email">Email</label>
         <input id="login-email" type="email" onChange={e => setEmail(e.target.value)} />

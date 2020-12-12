@@ -22,7 +22,7 @@
     border: 2px solid white;
 }
 
-.nav {
+.header {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -30,17 +30,17 @@
     font-family: 'Open Sans';
 }
 
-.nav-ul {
+.header-ul {
     display: flex;
     list-style: none;
 }
 
-.nav-ul a {
+.header-ul a {
     text-decoration: none;
     color: black;
 }
 
-.nav-ul li {
+.header-ul li {
     padding: 0 40px;
 }
 
@@ -67,6 +67,8 @@
     justify-content: center;
     align-items: center;
 }
+
+
 
 
 .create-post-form > button {
@@ -101,11 +103,17 @@
     justify-content: space-around;
 }
 
-.register-form, .login-form, .forgot-password-form {
+.header-h1 {
+    text-decoration: none;
+    color: black;
+    font-weight: bolder;
+}
+.register-form, .register-page, .login-form, .login-page, .forgot-password-form, .admin-login-page, .admin-login-form, .forgot-password-form, .forgot-password-page {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 30px;
 }
 
 .register-form > .form-control {
@@ -129,11 +137,40 @@
     padding: 10px;
 }
 
-.form-control > label {
+.register-form > label {
     padding: 10px 0;
 }
 
+.register-form > button {
+    margin: 30px 0;
+    padding: 5px 10px;
+}
 
+
+.login-form > label {
+    padding: 10px 0;
+}
+
+.login-form > button {
+    margin: 30px 0;
+    padding: 5px 10px;
+}
+.forgot-password-form > label {
+    padding: 10px 0;
+}
+
+.forgot-password-form > button {
+    margin: 30px 0;
+    padding: 5px 10px;
+}
+.admin-login-form > label {
+    padding: 10px 0;
+}
+
+.admin-login-form > button {
+    margin: 30px 0;
+    padding: 5px 10px;
+}
 
 .register-btn {
     margin-top: 10px;

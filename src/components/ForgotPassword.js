@@ -1,9 +1,6 @@
 import React, { useState} from "react";
-
 import Axios from "axios";
-
-import ErrorNotice from "./misc/ErrorNotice";
-
+import ErrorNotice from "../components/misc/ErrorNotice";
 
 const ForgotPassword = () => {
 
@@ -29,13 +26,11 @@ const ForgotPassword = () => {
         })
         } catch (err) {
             err.response.data.msg && setError(err.response.data.msg);
-        }
-
-    }
+        }}
 
 
 return (
-<div className="page">
+<div className="forgot-password-page">
     <h2>Forgot Password</h2>
 
     <h4>Please enter your email for password change.</h4>
@@ -44,7 +39,7 @@ return (
 
     <h3>{verifyMessage.text}</h3>
 
-    <form className="form" onSubmit={submit}>
+    <form className="forgot-password-form" onSubmit={submit}>
 
         <label htmlFor="forgot-email">Email</label>
         <input id="forgot-email" type="email" onChange={e => setEmail(e.target.value)} />

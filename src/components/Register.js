@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Axios from "axios";
-import ErrorNotice from "./misc/ErrorNotice";
+import ErrorNotice from "../components/misc/ErrorNotice";
+
 
 const Register = () => {
     const [username, setUsername] = useState();
@@ -26,7 +27,7 @@ const Register = () => {
     }}
 
     return (
-    <div className="page">
+    <div className="register-page">
         <h2>Register</h2>
         <h3>{verifyMessage.text}</h3>
         <h4>
@@ -34,7 +35,7 @@ const Register = () => {
             <ErrorNotice message={error} clearError={() => setError(undefined)} />
         )}
         </h4>
-        <form className="form" onSubmit={submit}>
+        <form className="register-form" onSubmit={submit}>
         <label htmlFor="register-username">Username</label>
         <input
             id="register-username"
