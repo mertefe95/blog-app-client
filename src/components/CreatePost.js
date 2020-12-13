@@ -6,11 +6,6 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
-import InputAdornment from '@material-ui/core/InputAdornment';
-
-import AccountCircle from '@material-ui/icons/AccountCircle';
-
-
 
 const CreatePost = () => {
     const [blogTitle, setBlogTitle] = useState("");
@@ -22,6 +17,18 @@ const CreatePost = () => {
         
     const authorName = userData.user.username
     const userId = userData.user.id
+
+    const useStyles = makeStyles((theme) => ({
+        root: {
+          '& > *': {
+            margin: theme.spacing(1),
+            width: '25ch',
+          },
+        },
+      }));
+
+    const classes = useStyles();
+
 
 
     const changeOnClick = e => {
@@ -48,17 +55,7 @@ const CreatePost = () => {
             err.response.data.msg && setError(err.response.data.msg);
         }}
     
-        const useStyles = makeStyles((theme) => ({
-            root: {
-              '& > *': {
-                margin: theme.spacing(1),
-                width: '25ch',
-              },
-            },
-          }));
-    
-        const classes = useStyles();
-
+     
 
     return (
 
