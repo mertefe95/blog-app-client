@@ -42,10 +42,10 @@ export default function AuthOptions() {
         <nav className="auth-options" className={classes.root}>
         { userData.user ? (
             <ul className="header-ul">
-            <li><Fab variant="extended" color="primary" aria-label="add" className={classes.margin}>
+            <li><Link to="/create-post"><Fab variant="extended" color="primary" aria-label="add" className={classes.margin}>
                 <AddIcon className={classes.extendedIcon} />
                 CREATE A POST
-                </Fab></li>
+                </Fab></Link></li>
             <li><Button variant="contained"  onClick={logout}>Logout </Button></li>  
             </ul>
         ) : (

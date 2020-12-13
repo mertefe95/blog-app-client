@@ -52,7 +52,7 @@ const Posts = ({ posts }) => {
         )}
         </h4>
         
-        { userData.user ? (
+        { userData.user && userData.user.id === post.userId ? (
             <div className="post-icons-div">
             <Link to={`/edit-post/${post._id}`}><i className="far fa-edit"></i></Link>
             <Link><button onClick={() => deletePost(post._id)}><i className="far fa-trash-alt"></i></button></Link>

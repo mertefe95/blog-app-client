@@ -1,14 +1,23 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext } from "react";
+import { useHistory  } from "react-router-dom";
 import Axios from "axios";
+
 import ErrorNotice from "../components/misc/ErrorNotice";
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 
 
 const EditPost = props => {
     const [blogTitle, setBlogTitle] = useState("");
     const [blogText, setBlogText] = useState("");
-    const [authorName, setAuthorName] = useState("");
+    const [userId, setUserId] = useState("");
     const [message, setMessage] = useState("");
     const [error, setError] = useState();
+
+
+    const history = useHistory();
+
 
     const changeOnClick = e => {
         e.preventDefault();
@@ -18,12 +27,15 @@ const EditPost = props => {
         const post = {
             blogTitle,
             blogText,
-            authorName
+            userId
         };
 
         setBlogTitle("");
         setBlogText("");
-        setAuthorName("");
+        setUserId("");
+
+
+        
 
         Axios
             .put(`http://localhost:8080/api/posts/${props.match.params.id}`, post)
@@ -35,10 +47,22 @@ const EditPost = props => {
             err.response.data.msg && setError(err.response.data.msg);
         }}
     
+        const useStyles = makeStyles((theme) => ({
+            root: {
+              '& > *': {
+                margin: theme.spacing(1),
+                width: '25ch',
+              },
+            },
+          }));
+    
+        const classes = useStyles();
+
 
     return (
-        <form onSubmit={changeOnClick} encType="multipart/form-data"> 
-            <h1>Update Article</h1>
+        
+        <div className="edit-post-page">
+            <h1>Update Blog Post</h1>
             <span className="message">{message}</span>
             <h4>
             {error && (
@@ -46,39 +70,31 @@ const EditPost = props => {
             )}
             </h4>
 
-            <div className="form-group">
-                <label htmlFor="blogTitle">Blog Title:</label>
-                <input 
-                    type="text" 
-                    id="blogTitle" 
-                    className="form-control"
-                    onChange={e => setBlogTitle(e.target.value)}  />
-            </div>
 
-            <div className="form-group">
-                <label htmlFor="blogText">Blog Text:</label>
-                <input 
-                    type="text" 
-                    id="blogText" 
-                    className="form-control" 
-                    onChange={e => setBlogText(e.target.value)} 
-                    />
-                
-            </div>
+            <form id="edit-post-form" onSubmit={changeOnClick} encType="multipart/form-data"  className={classes.root} noValidate autoComplete="off">    
+        <TextField required id="standard-blogTitle-input"
+            label="Blog Title"
+            type="text"
+            autoComplete="current-blogTitle"
+            id="blogTitle"
+            onChange={e => setBlogTitle(e.target.value)}
+        />
+        <TextField required id="standard-blogText-input"
+            label="Blog Text"
+            type="text"
+            autoComplete="current-blogText"
+            id="blogText"  
+            onChange={e => setBlogText(e.target.value)} 
+        />
+            <Button variant="contained" color="primary" type="submit">
+                Submit
+            </Button>
 
-            <div className="form-group">
-                <label htmlFor="authorName">Author Name:</label>
-                <input 
-                    type="text" 
-                    id="authorName" 
-                    className="form-control"
-                    onChange={e => setAuthorName(e.target.value)}  />
-                
-            </div>
-
-            <button type="submit" className="submit-btn">Update Post</button>
 
         </form>
+</div>
+
+
     )
     }
 export default EditPost;

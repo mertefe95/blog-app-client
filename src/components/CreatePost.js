@@ -1,22 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Axios from "axios";
 import UserContext from "../context/UserContext";
 import ErrorNotice from "../components/misc/ErrorNotice";
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+
+import InputAdornment from '@material-ui/core/InputAdornment';
+
+import AccountCircle from '@material-ui/icons/AccountCircle';
+
 
 
 const CreatePost = () => {
     const [blogTitle, setBlogTitle] = useState("");
     const [blogText, setBlogText] = useState("");
-    const [authorName, setAuthorName] = useState("");
     const [message, setMessage] = useState("");
     const [error, setError] = useState();
     
     const { userData, setUserData } = useContext(UserContext); 
         
+    const authorName = userData.user.username
+    const userId = userData.user.id
 
 
     const changeOnClick = e => {
-        const userId = userData.user._id
+        
     
         e.preventDefault();
 
@@ -24,7 +33,8 @@ const CreatePost = () => {
         const post = {
             blogTitle,
             blogText,
-            userId
+            userId,
+            authorName
         }
 
         Axios
@@ -38,11 +48,21 @@ const CreatePost = () => {
             err.response.data.msg && setError(err.response.data.msg);
         }}
     
+        const useStyles = makeStyles((theme) => ({
+            root: {
+              '& > *': {
+                margin: theme.spacing(1),
+                width: '25ch',
+              },
+            },
+          }));
+    
+        const classes = useStyles();
 
 
     return (
 
-        <form className="create-post-form" onSubmit={changeOnClick} encType="multipart/form-data"> 
+        <div className="create-post-page">
             <h1>Create a Blog Post</h1>
             <span className="message">{message}</span>
             <h4>
@@ -50,41 +70,29 @@ const CreatePost = () => {
             <ErrorNotice message={error} clearError={() => setError(undefined)} />
             )}
             </h4>
+            
+            <form id="create-post-form" onSubmit={changeOnClick} encType="multipart/form-data"  className={classes.root} noValidate autoComplete="off">    
+        <TextField required id="standard-blogTitle-input"
+            label="Blog Title"
+            type="text"
+            autoComplete="current-blogTitle"
+            id="blogTitle"
+            onChange={e => setBlogTitle(e.target.value)}
+        />
+        <TextField required id="standard-blogText-input"
+            label="Blog Text"
+            type="text"
+            autoComplete="current-blogText"
+            id="blogText"  
+            onChange={e => setBlogText(e.target.value)} 
+        />
+            <Button variant="contained" color="primary" type="submit">
+                Submit
+            </Button>
 
-
-            <div className="form-group">
-                <label htmlFor="blogTitle">Blog Title:</label>
-                <input 
-                    type="text" 
-                    id="blogTitle" 
-                    className="form-control"
-                    onChange={e => setBlogTitle(e.target.value)}  />
-            </div>
-
-            <div className="form-group">
-                <label htmlFor="blogText">Blog Text:</label>
-                <input 
-                    type="text" 
-                    id="blogText" 
-                    className="form-control" 
-                    onChange={e => setBlogText(e.target.value)} 
-                    />
-                
-            </div>
-
-            <div className="form-group">
-                <label htmlFor="authorName">Author Name:</label>
-                <input 
-                    type="text" 
-                    id="authorName" 
-                    className="form-control"
-                    onChange={e => setAuthorName(e.target.value)}  />
-                
-            </div>
-
-            <button type="submit" className="submit-btn">Submit</button>
 
         </form>
+        </div>
     )
 }
 

@@ -110,7 +110,7 @@
     color: black;
     font-weight: bolder;
 }
-.register-form, .register-page, .login-form, .login-page, .forgot-password-form, .admin-login-page, .admin-login-form, .forgot-password-form, .forgot-password-page {
+.register-form, .register-page, .login-form, .login-page, .forgot-password-form, .admin-login-page, .admin-login-form, .forgot-password-form, .forgot-password-page, .create-post-page, .edit-post-page {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -165,6 +165,26 @@
     margin: 30px 0;
     padding: 5px 10px;
 }
+
+#create-post-form > label {
+    padding: 10px 0;
+}
+
+#create-post-form > button {
+    margin: 30px 0;
+    padding: 5px 10px;
+}
+
+
+#edit-post-form > label {
+    padding: 10px 0;
+}
+
+#edit-post-form > button {
+    margin: 30px 0;
+    padding: 5px 10px;
+}
+
 .admin-login-form > label {
     padding: 10px 0;
 }
@@ -198,4 +218,14 @@
 }
 .login-page > button {
     padding-top: 50px;
+}
+
+#create-post-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#edit-post-form {
+    display: flex;
+    flex-direction: column;
 }

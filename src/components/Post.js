@@ -18,7 +18,7 @@ useEffect(() => {
     ])
     .catch(error => console.log(error));
 
-    }catch (err) {
+    } catch (err) {
         err.response.data.msg && setError(err.response.data.msg);
     }
 }, [props]);
