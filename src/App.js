@@ -68,11 +68,12 @@ function App() {
           <Route exact path="/register" exact component={Register} />
           <Route exact path="/login" exact component={Login} />
           <Route exact path="/forgot-password" exact component={ForgotPassword} />
+          <Route exact path="/edit-post/:id" exact render={(props) => <EditPost {...props}  posts={posts} />} />
           
           
           { userData.user ? (
-            <Route exact path="/create-post" exact component={CreatePost} />,
-            <Route exact path="/edit-post/:id" exact render={(props) => <EditPost {...props}  posts={posts} />} />
+            <Route exact path="/create-post" exact component={CreatePost} />
+            
         ) : (
             <>
 
