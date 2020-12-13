@@ -4,6 +4,15 @@ import Axios from "axios";
 import { useHistory } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import ErrorNotice from "../components/misc/ErrorNotice";
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
+
+
 
 const Posts = ({ posts }) => {
     const [post, setPost] = useState([]);
@@ -23,6 +32,28 @@ const Posts = ({ posts }) => {
             err.response.data.msg && setError(err.response.data.msg);
         }}
 
+        const useStyles = makeStyles({
+            root: {
+              minWidth: 275,
+            },
+            bullet: {
+              display: 'inline-block',
+              margin: '0 2px',
+              transform: 'scale(0.8)',
+            },
+            title: {
+              fontSize: 14,
+            },
+            pos: {
+              marginBottom: 12,
+            },
+          });
+          
+
+          const classes = useStyles();
+          const bull = <span className={classes.bullet}>•</span>;
+        
+
     return (
     
     
@@ -32,7 +63,8 @@ const Posts = ({ posts }) => {
     {posts.map((post, key) => (
     <div className="post-div" key={key}>
 
-
+        <Card className={classes.root}>
+        <CardActions>
         <Link to={{
             pathname: `/post/${post._id}`
         }}>
@@ -41,11 +73,21 @@ const Posts = ({ posts }) => {
         <h2>{post.blogTitle}</h2>
 
         </Link>
+        </CardActions>
+        <CardContent>
+        <Typography className={classes.title} color="textSecondary" gutterBottom>
+            
+        </Typography>
+        <Typography variant="h5" component="h2">
+            {post.blogText}
+        </Typography>
+        <Typography className={classes.pos} color="textSecondary">
+            {post.authorName}
+        </Typography>
 
+        </CardContent>
+    </Card>
 
-        
-        <p>{post.blogText}</p>
-        <span>{post.authorName}</span>
         <h4>
         {error && (
             <ErrorNotice message={error} clearError={() => setError(undefined)} />

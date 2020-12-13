@@ -38,7 +38,7 @@ const CreatePost = () => {
         }
 
         Axios
-            .post("http://localhost:8080/api/posts", post)
+            .post("https://blog-app-mern-stack.herokuapp.com/api/posts", post)
             .then(res => setMessage(res.data))
             .catch(err => {
                 console.log(err);

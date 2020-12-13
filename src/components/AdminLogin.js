@@ -22,7 +22,7 @@ const AdminLogin = () => {
         try {
         const loginAdmin = { email, password };
         const loginRes = await Axios.post(
-            "http://localhost:8080/api/login", 
+            "https://blog-app-mern-stack.herokuapp.com/api/login", 
                 loginAdmin
             );
 
