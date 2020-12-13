@@ -38,7 +38,7 @@ const Register = () => {
         await Axios.post("https://blog-app-mern-stack.herokuapp.com/api/register", newUser);
 
         setVerifyMessage({
-        text: "Please click the LOGIN button and proceed to Login.",
+        text: "Succesful Registration! Please click the LOGIN button and proceed to Login.",
         });
     } catch (err) {
         err.response.data.msg && setError(err.response.data.msg);
