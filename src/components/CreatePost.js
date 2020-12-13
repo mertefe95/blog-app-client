@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Axios from "axios";
+import UserContext from "../context/UserContext";
 import ErrorNotice from "../components/misc/ErrorNotice";
+
 
 const CreatePost = () => {
     const [blogTitle, setBlogTitle] = useState("");
@@ -8,16 +10,21 @@ const CreatePost = () => {
     const [authorName, setAuthorName] = useState("");
     const [message, setMessage] = useState("");
     const [error, setError] = useState();
+    
+    const { userData, setUserData } = useContext(UserContext); 
+        
+
 
     const changeOnClick = e => {
-        
+        const userId = userData.user._id
+    
         e.preventDefault();
 
         try {
         const post = {
             blogTitle,
             blogText,
-            authorName
+            userId
         }
 
         Axios

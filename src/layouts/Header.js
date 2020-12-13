@@ -5,15 +5,15 @@ import AuthOptions from "../components/misc/AuthOptions";
 function Header() {
 
     return (
-        <nav className="header">
+        <header className="header">
             <Link className="header-h1" to="/">
-                <h1>BLOG APP</h1>
+                <h1>BLOG APP!</h1>
             </Link>
 
-            <ul className="header-ul">    
-                <AuthOptions />
-            </ul>
-        </nav>
+            
+            <AuthOptions />
+        
+        </header>
     );
 
 }

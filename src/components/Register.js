@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import Axios from "axios";
 import ErrorNotice from "../components/misc/ErrorNotice";
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+
+import InputAdornment from '@material-ui/core/InputAdornment';
+
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 
 const Register = () => {
@@ -11,6 +18,17 @@ const Register = () => {
     const [verifyMessage, setVerifyMessage] = useState({
     text: undefined,
     });
+
+    const useStyles = makeStyles((theme) => ({
+        root: {
+          '& > *': {
+            margin: theme.spacing(1),
+            width: '25ch',
+          },
+        },
+      }));
+
+    const classes = useStyles();
 
     const submit = async (e) => {
     e.preventDefault();
@@ -35,30 +53,47 @@ const Register = () => {
             <ErrorNotice message={error} clearError={() => setError(undefined)} />
         )}
         </h4>
-        <form className="register-form" onSubmit={submit}>
-        <label htmlFor="register-username">Username</label>
-        <input
-            id="register-username"
-            type="username"
-            onChange={(e) => setUsername(e.target.value)}
+
+<form className="register-form" onSubmit={submit} className={classes.root} noValidate autoComplete="off">
+<TextField
+        onChange={(e) => setUsername(e.target.value)}
+        className={classes.margin}
+        id="input-with-icon-textfield"
+        label="Username"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <AccountCircle />
+            </InputAdornment>
+          ),
+        }}
+        
+      />
+
+<TextField required id="standard-email-input"
+          label="Email"
+          type="email"
+          autoComplete="current-email"
+          id="register-email"
+          onChange={(e) => setEmail(e.target.value)}  
+          
+        />
+<TextField required id="standard-password-input"
+          label="Password"
+          type="password"
+          autoComplete="current-password"
+          id="register-password"  
+          onChange={(e) => setPassword(e.target.value)}
         />
 
-        <label htmlFor="register-email">Email</label>
-        <input
-            id="register-email"
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-        />
+        
 
-        <label htmlFor="register-password">Password</label>
-        <input
-            id="register-password"
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-        />
 
-        <button type="submit">Submit</button>
-        </form>
+        
+ <Button variant="contained" color="primary" type="submit">
+        Submit
+    </Button>
+    </form>
         </div>
     );
 };

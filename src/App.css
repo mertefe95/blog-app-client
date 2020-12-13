@@ -33,6 +33,8 @@
 .header-ul {
     display: flex;
     list-style: none;
+    align-items: center;
+    justify-content: center;
 }
 
 .header-ul a {
@@ -176,3 +178,24 @@
     margin-top: 10px;
 }
 
+.register-page > form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+.register-page > button {
+    padding-top: 50px;
+}
+
+.login-page > form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+.login-page > button {
+    padding-top: 50px;
+}

@@ -1,15 +1,19 @@
 import React, {useState, useEffect} from "react";
 import Axios from "axios";
+import ErrorNotice from "../components/misc/ErrorNotice";
+
 
 const EditPost = props => {
     const [blogTitle, setBlogTitle] = useState("");
     const [blogText, setBlogText] = useState("");
     const [authorName, setAuthorName] = useState("");
     const [message, setMessage] = useState("");
+    const [error, setError] = useState();
 
     const changeOnClick = e => {
         e.preventDefault();
 
+        try {
 
         const post = {
             blogTitle,
@@ -27,13 +31,20 @@ const EditPost = props => {
             .catch(err => {
                 console.log(err);
             })
-    }
+        } catch (err) {
+            err.response.data.msg && setError(err.response.data.msg);
+        }}
+    
 
     return (
         <form onSubmit={changeOnClick} encType="multipart/form-data"> 
             <h1>Update Article</h1>
             <span className="message">{message}</span>
-
+            <h4>
+            {error && (
+            <ErrorNotice message={error} clearError={() => setError(undefined)} />
+            )}
+            </h4>
 
             <div className="form-group">
                 <label htmlFor="blogTitle">Blog Title:</label>
