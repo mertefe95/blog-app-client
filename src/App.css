@@ -229,3 +229,11 @@
     display: flex;
     flex-direction: column;
 }
+
+.error-notice {
+    color: red;
+}
+
+.verify-message {
+    color: blue;
+}

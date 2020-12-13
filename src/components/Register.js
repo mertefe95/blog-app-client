@@ -38,7 +38,7 @@ const Register = () => {
         await Axios.post("https://blog-app-mern-stack.herokuapp.com/api/register", newUser);
 
         setVerifyMessage({
-        text: "Please verify your email to proceed login.",
+        text: "Please click the LOGIN button and proceed to Login.",
         });
     } catch (err) {
         err.response.data.msg && setError(err.response.data.msg);
@@ -47,7 +47,7 @@ const Register = () => {
     return (
     <div className="register-page">
         <h2>Register</h2>
-        <h3>{verifyMessage.text}</h3>
+        <h3 className="verify-message">{verifyMessage.text}</h3>
         <h4>
         {error && (
             <ErrorNotice message={error} clearError={() => setError(undefined)} />
