@@ -1,7 +1,6 @@
-import React, {useState, useEffect, useContext } from "react";
-import { useHistory  } from "react-router-dom";
+import React, {useState, useContext } from "react";
+import UserContext from ".././context/UserContext";
 import Axios from "axios";
-
 import ErrorNotice from "../components/misc/ErrorNotice";
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,17 +10,15 @@ import TextField from '@material-ui/core/TextField';
 const EditPost = props => {
     const [blogTitle, setBlogTitle] = useState("");
     const [blogText, setBlogText] = useState("");
-    const [userId, setUserId] = useState("");
     const [message, setMessage] = useState("");
     const [error, setError] = useState();
 
-
-    const history = useHistory();
-
+    const { userData} = useContext(UserContext); 
+    const userId = userData.user.id
 
     const changeOnClick = e => {
         e.preventDefault();
-
+        
         try {
 
         const post = {
@@ -30,18 +27,15 @@ const EditPost = props => {
             userId
         };
 
-        setBlogTitle("");
-        setBlogText("");
-        setUserId("");
+        console.log(props.match.params.id)
 
-
-        
+  
 
         Axios
             .put(`http://localhost:8080/api/posts/${props.match.params.id}`, post)
-            .then(res => setMessage(res.data))
+            .then(res => setMessage(res.data.msg))
             .catch(err => {
-                console.log(err);
+                err.response.data.msg && setError(err.response.data.msg);
             })
         } catch (err) {
             err.response.data.msg && setError(err.response.data.msg);

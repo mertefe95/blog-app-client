@@ -18,6 +18,8 @@ const CreatePost = () => {
     const authorName = userData.user.username
     const userId = userData.user.id
 
+    console.log(userId)
+
     const useStyles = makeStyles((theme) => ({
         root: {
           '& > *': {
