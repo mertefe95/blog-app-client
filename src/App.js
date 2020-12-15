@@ -70,7 +70,7 @@ function App() {
           <Route exact path="/register" exact component={Register} />
           <Route exact path="/login" exact component={Login} />
           <Route exact path="/forgot-password" exact component={ForgotPassword} />
-          <Route exact path="/change-password" exact component={ChangePassword} />
+          <Route exact path="/change-password/:forgotToken" exact component={ChangePassword} />
           { userData.user ? (
             <Route exact path="/edit-post/:id" exact render={(props) => <EditPost {...props}  posts={posts} />} />
             

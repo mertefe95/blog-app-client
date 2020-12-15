@@ -19,9 +19,9 @@ const ForgotPassword = () => {
           '& > *': {
             margin: theme.spacing(1),
             width: '25ch',
-          },
+            },
         },
-      }));
+    }));
 
     const classes = useStyles();
 
@@ -31,10 +31,10 @@ const ForgotPassword = () => {
         e.preventDefault();
 
         try {
-        const currentUser = { email  };
+       
         await Axios.post(
             "http://localhost:8080/api/forgot-password", 
-            currentUser
+            email
         );
 
         await setVerifyMessage({
