@@ -29,8 +29,7 @@ const Register = () => {
       }));
 
     const classes = useStyles();
-   
-    const preventDefault = (event) => event.preventDefault();
+
   
     const submit = async (e) => {
     e.preventDefault();
