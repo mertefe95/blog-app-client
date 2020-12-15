@@ -25,7 +25,7 @@ const Posts = ({ posts }) => {
     // DELETE POST BY ID
     const deletePost = id => {
         try {
-        Axios.delete(`https://blog-app-mern-stack.herokuapp.com/api/posts/${id}`)
+        Axios.delete(`http://localhost:8080/api/posts/${id}`)
             .then(res => alert(res.data))
             setPost(post.filter(elem => elem._id !== id));
         }   catch (err) {

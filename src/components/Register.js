@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import Axios from "axios";
+import { Link } from "react-router-dom"
 import ErrorNotice from "../components/misc/ErrorNotice";
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
+import Typography from '@material-ui/core/Typography';
 import InputAdornment from '@material-ui/core/InputAdornment';
-
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
 
@@ -29,16 +30,18 @@ const Register = () => {
       }));
 
     const classes = useStyles();
-
+   
+    const preventDefault = (event) => event.preventDefault();
+  
     const submit = async (e) => {
     e.preventDefault();
 
     try {
         const newUser = { username, email, password };
-        await Axios.post("https://blog-app-mern-stack.herokuapp.com/api/register", newUser);
+        await Axios.post("http://localhost:8080/api/register", newUser);
 
         setVerifyMessage({
-        text: "Succesful Registration! Please click the LOGIN button and proceed to Login.",
+        text: "Succesful Registration! Please verify your email address before Login.",
         });
     } catch (err) {
         err.response.data.msg && setError(err.response.data.msg);
@@ -86,13 +89,20 @@ const Register = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        
-
-
-        
  <Button variant="contained" color="primary" type="submit">
         Submit
     </Button>
+
+    <Typography className={classes.root}>
+    <Link to="/admin-login">
+    Admin Login
+    </Link>
+    <Link to="/forgot-password" >
+    Forgot your password?
+    </Link>
+    </Typography>
+
+    
     </form>
         </div>
     );

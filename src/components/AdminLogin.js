@@ -3,6 +3,10 @@ import { useHistory, Link } from "react-router-dom";
 import Axios from "axios";
 import UserContext from "../context/UserContext";
 import ErrorNotice from "../components/misc/ErrorNotice";
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+
 
 const AdminLogin = () => {
 
@@ -14,6 +18,18 @@ const AdminLogin = () => {
     const { setUserData } = useContext(UserContext);
     const history = useHistory();
 
+    
+    const useStyles = makeStyles((theme) => ({
+        root: {
+          '& > *': {
+            margin: theme.spacing(1),
+            width: '25ch',
+          },
+        },
+      }));
+
+    const classes = useStyles();
+
 
     const submit = async (e) => {
         
@@ -22,7 +38,7 @@ const AdminLogin = () => {
         try {
         const loginAdmin = { email, password };
         const loginRes = await Axios.post(
-            "https://blog-app-mern-stack.herokuapp.com/api/login", 
+            "http://localhost:8080/api/login", 
                 loginAdmin
             );
 
@@ -47,17 +63,28 @@ return (
             <ErrorNotice message={error} clearError={() => setError(undefined)} />
         )} </h4>
 
+        <form id="admin-login-form" onSubmit={submit} className={classes.root} noValidate autoComplete="off">
 
-    <form className="admin-login-form" onSubmit={submit}>
+<TextField required id="standard-email-input"
+          label="Email"
+          type="email"
+          autoComplete="current-email"
+          id="register-email"
+          onChange={(e) => setEmail(e.target.value)}  
+          
+        />
+<TextField required id="standard-password-input"
+          label="Password"
+          type="password"
+          autoComplete="current-password"
+          id="register-password"  
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-        <label htmlFor="login-email">Admin Email</label>
-        <input id="login-email" type="email" onChange={e => setEmail(e.target.value)} />
-
-        <label htmlFor="login-password">Admin Password</label>
-        <input id="login-password" type="password" onChange={e => setPassword(e.target.value)} />
-
-        <button type="submit">Submit</button>
-
+        
+ <Button variant="contained" color="primary" type="submit">
+        Submit
+    </Button>
     </form>
 </div>
 )}

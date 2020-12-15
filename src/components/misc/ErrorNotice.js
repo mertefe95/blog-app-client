@@ -7,12 +7,12 @@ export default function ErrorNotice(props) {
         root: {
           '& > *': {
             margin: theme.spacing(1),
-          },
         },
-      }));
-      const classes = useStyles();
+        },
+        }));
+        const classes = useStyles();
 
-      
+    
     return (
         <div className="error-notice">
             <span>{props.message}</span>

@@ -1,6 +1,10 @@
 import React, { useState} from "react";
 import Axios from "axios";
 import ErrorNotice from "../components/misc/ErrorNotice";
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+
 
 const ForgotPassword = () => {
 
@@ -10,6 +14,18 @@ const ForgotPassword = () => {
         text: undefined
     });
 
+    const useStyles = makeStyles((theme) => ({
+        root: {
+          '& > *': {
+            margin: theme.spacing(1),
+            width: '25ch',
+          },
+        },
+      }));
+
+    const classes = useStyles();
+
+
 
     const submit = async (e) => {
         e.preventDefault();
@@ -17,7 +33,7 @@ const ForgotPassword = () => {
         try {
         const currentUser = { email  };
         await Axios.post(
-            "https://blog-app-mern-stack.herokuapp.com/api/forgot-password", 
+            "http://localhost:8080/api/forgot-password", 
             currentUser
         );
 
@@ -39,13 +55,21 @@ return (
 
     <h3>{verifyMessage.text}</h3>
 
-    <form className="forgot-password-form" onSubmit={submit}>
+    <form id="forgot-password-form" onSubmit={submit} className={classes.root} noValidate autoComplete="off">
 
-        <label htmlFor="forgot-email">Email</label>
-        <input id="forgot-email" type="email" onChange={e => setEmail(e.target.value)} />
+<TextField required id="standard-email-input"
+          label="Email"
+          type="email"
+          autoComplete="current-email"
+          id="register-email"
+          onChange={(e) => setEmail(e.target.value)}  
+          
+        />
 
-
-        <button type="submit">Submit</button>
+        
+ <Button variant="contained" color="primary" type="submit">
+        Submit
+    </Button>
     </form>
 </div>
 

@@ -38,7 +38,7 @@ const EditPost = props => {
         
 
         Axios
-            .put(`https://blog-app-mern-stack.herokuapp.com/api/posts/${props.match.params.id}`, post)
+            .put(`http://localhost:8080/api/posts/${props.match.params.id}`, post)
             .then(res => setMessage(res.data))
             .catch(err => {
                 console.log(err);

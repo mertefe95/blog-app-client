@@ -230,6 +230,17 @@
     flex-direction: column;
 }
 
+#admin-login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#forgot-password-form {
+    display: flex;
+    flex-direction: column;
+}
+
+
 .error-notice {
     color: red;
 }
