@@ -14,6 +14,8 @@ import UserContext from "./context/UserContext";
 import ForgotPassword from "./components/ForgotPassword";
 import AdminLogin from "./components/AdminLogin";
 import ChangePassword from "./components/ChangePassword";
+import UserActivated from './components/UserActivated';
+
 
 
 function App() {
@@ -71,6 +73,7 @@ function App() {
           <Route exact path="/login" exact component={Login} />
           <Route exact path="/forgot-password" exact component={ForgotPassword} />
           <Route exact path="/change-password/:forgotToken" exact component={ChangePassword} />
+          <Route exact path="/user-activated/:activationKey" exact component={UserActivated} />
           { userData.user ? (
             <Route exact path="/edit-post/:id" exact render={(props) => <EditPost {...props}  posts={posts} />} />
             

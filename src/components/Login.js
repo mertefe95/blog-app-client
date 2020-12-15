@@ -29,9 +29,9 @@ const Login = () => {
           '& > *': {
             margin: theme.spacing(1),
             width: '25ch',
-          },
+            },
         },
-      }));
+        }));
 
     const classes = useStyles();
 
@@ -44,7 +44,7 @@ const Login = () => {
 
         const loginUser = { email, password };
         const loginRes = await Axios.post(
-            "https://blog-app-mern-stack.herokuapp.com/api/login", 
+            "http://localhost:8080/api/login", 
                 loginUser);
 
             setUserData({

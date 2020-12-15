@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField';
 
 const ForgotPassword = () => {
 
-    const [email, setEmail] = useState();
+    const [email, setEmail] = useState("");
     const [error, setError] = useState();
     const [verifyMessage, setVerifyMessage] = useState({
         text: undefined
@@ -30,11 +30,12 @@ const ForgotPassword = () => {
     const submit = async (e) => {
         e.preventDefault();
 
+        const user = { email } 
+
         try {
-       
         await Axios.post(
             "http://localhost:8080/api/forgot-password", 
-            email
+            user
         );
 
         await setVerifyMessage({
