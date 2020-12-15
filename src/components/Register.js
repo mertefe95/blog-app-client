@@ -37,7 +37,7 @@ const Register = () => {
 
     try {
         const newUser = { username, email, password };
-        await Axios.post("http://localhost:8080/api/register", newUser);
+        await Axios.post("https://blog-app-mern-stack.herokuapp.com/api/register", newUser);
 
         setVerifyMessage({
         text: "Succesful Registration! Please verify your email address before Login.",
