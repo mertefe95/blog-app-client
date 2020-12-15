@@ -13,6 +13,8 @@ import EditPost from "./components/EditPost";
 import UserContext from "./context/UserContext";
 import ForgotPassword from "./components/ForgotPassword";
 import AdminLogin from "./components/AdminLogin";
+import ChangePassword from "./components/ChangePassword";
+
 
 function App() {
   const [posts, setPosts] = useState([])
@@ -68,6 +70,7 @@ function App() {
           <Route exact path="/register" exact component={Register} />
           <Route exact path="/login" exact component={Login} />
           <Route exact path="/forgot-password" exact component={ForgotPassword} />
+          <Route exact path="/change-password" exact component={ChangePassword} />
           { userData.user ? (
             <Route exact path="/edit-post/:id" exact render={(props) => <EditPost {...props}  posts={posts} />} />
             
