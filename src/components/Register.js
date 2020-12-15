@@ -5,7 +5,6 @@ import ErrorNotice from "../components/misc/ErrorNotice";
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-
 import Typography from '@material-ui/core/Typography';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -102,7 +101,7 @@ const Register = () => {
     </Link>
     </Typography>
 
-    
+
     </form>
         </div>
     );

@@ -63,7 +63,7 @@ const useStyles = makeStyles({
             
         </Typography>
         <Typography variant="h5" component="h2">
-        {blogText}
+        <h2>{blogText}</h2>
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
         {authorName}
