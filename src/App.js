@@ -34,17 +34,20 @@ function App() {
       }
   
       const tokenRes = await Axios.post(
-        "https://blog-app-mern-stack.herokuapp.com/api/tokenIsValid",  
+        "https://blog-app-mern-stack.herokuapp.com/api/tokenIsValid", 
+        null, 
         { headers: {"x-auth-token": token } }
         );
         if (tokenRes.data) {
           const userRes = await Axios.get("https://blog-app-mern-stack.herokuapp.com/api/", {
             headers: { "x-auth-token": token },
         });
+        console.log(userRes.data)
         setUserData({
           token,
           user: userRes.data,
         });
+        
         }
     };
   

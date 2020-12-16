@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Axios from "axios";
 import UserContext from "../context/UserContext";
 import ErrorNotice from "../components/misc/ErrorNotice";
@@ -7,9 +7,6 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
-import InputAdornment from '@material-ui/core/InputAdornment';
-
-import AccountCircle from '@material-ui/icons/AccountCircle';
 
 
 const Login = () => {
@@ -44,7 +41,7 @@ const Login = () => {
 
         const loginUser = { email, password };
         const loginRes = await Axios.post(
-            "http://localhost:8080/api/login", 
+            "https://blog-app-mern-stack.herokuapp.com/api/login", 
                 loginUser);
 
             setUserData({

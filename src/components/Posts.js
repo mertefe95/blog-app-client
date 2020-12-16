@@ -8,7 +8,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 
@@ -18,14 +17,14 @@ const Posts = ({ posts }) => {
     const [post, setPost] = useState([]);
     const [error, setError] = useState();
 
-    const { userData, setUserData } = useContext(UserContext); 
+    const { userData} = useContext(UserContext); 
 
-    const history = useHistory();
+
 
     // DELETE POST BY ID
     const deletePost = id => {
         try {
-        Axios.delete(`http://localhost:8080/api/posts/${id}`)
+        Axios.delete(`https://blog-app-mern-stack.herokuapp.com/api/posts/${id}`)
             .then(res => alert(res.data))
             setPost(post.filter(elem => elem._id !== id));
         }   catch (err) {
